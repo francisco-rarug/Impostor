@@ -1,9 +1,9 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
@@ -15,12 +15,32 @@ body {
   align-items: center;
 }
 
+.title-container {
+  display: flex;
+  align-items: center; 
+  gap: 1rem;
+  margin-bottom: 10px;
+  justify-content: center;
+  margin: 0;
+}
+
+.title-container h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #e60707;
+}
+
+.title-image {
+  width: 50px;
+  height: auto;
+}
+
 
 section {
   width: 100%;
   max-width: 420px;
   background: linear-gradient(180deg, #16161d, #121218);
-  padding: 32px;
+  padding: 28px;
   border-radius: 20px;
   box-shadow: 0 25px 80px rgba(0,0,0,.65);
 }
@@ -29,13 +49,11 @@ section {
   display: none;
 }
 
-h1,
-h2 {
+h1, h2 {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   font-weight: 700;
 }
-
 
 label {
   display: block;
@@ -43,7 +61,7 @@ label {
   font-size: 14px;
 }
 
-select {
+input, select {
   width: 100%;
   padding: 12px 14px;
   border-radius: 10px;
@@ -52,21 +70,10 @@ select {
   background: #22222b;
   color: #fff;
   font-size: 15px;
+  margin-bottom: 5px;
 }
 
-
-input {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 6px;
-  background: #22222b;
-  color: #fff;
-  font-size: 15px;
-}
-
-input:focus {
+input:focus, select:focus {
   outline: 2px solid #5865f2;
 }
 
@@ -82,22 +89,11 @@ button {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(88,101,242,.35);
 }
 
 button.secondary {
   background: #2a2a35;
 }
-
-button.secondary:hover {
-  box-shadow: none;
-}
-
 
 .card {
   width: 100%;
@@ -112,7 +108,7 @@ button.secondary:hover {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
+  transition: transform .6s ease;
   border-radius: 18px;
 }
 
@@ -137,7 +133,6 @@ button.secondary:hover {
   background: linear-gradient(135deg, #1e1e29, #171722);
   color: #9ca3af;
   font-size: 18px;
-  font-weight: 500;
 }
 
 .card-back {
@@ -146,10 +141,7 @@ button.secondary:hover {
   font-size: 32px;
   font-weight: 700;
   transform: rotateY(180deg);
-  line-height: 1.2;
-  word-break: break-word;
 }
-
 
 #timer {
   text-align: center;
@@ -158,79 +150,162 @@ button.secondary:hover {
   margin: 24px 0;
 }
 
+#timer.danger {
+  color: #ef4444;
+}
+
 .vote-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
 }
 
 .vote-player {
-  padding: 16px 20px;
+  padding: 16px;
   background: linear-gradient(135deg, #1e1e29, #181822);
   border-radius: 16px;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: all .25s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,.45);
   font-weight: 600;
-}
-
-.vote-player:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #25253a, #1c1c28);
 }
 
 .vote-player.selected {
   border-color: #5865f2;
-  background: linear-gradient(135deg, #2a2a45, #1f1f35);
-  box-shadow: 0 0 0 2px rgba(88,101,242,.3);
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-6px); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-}
-
-
-.vote-player.eliminated {
-  animation: shake 0.4s ease, fadeOut 0.6s ease 0.4s forwards;
-  border-color: #ef4444;
-}
-
-
-.vote-player.impostor {
-  animation: shake 0.5s ease;
-  background: linear-gradient(135deg, #7f1d1d, #450a0a);
-  border-color: #ef4444;
-  color: #fff;
-}
-
-@keyframes eject {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  40% {
-    transform: translateY(-20px) scale(1.05);
-  }
-  100% {
-    transform: translateY(200px) scale(0.4);
-    opacity: 0;
-  }
 }
 
 .vote-player.ejected {
   animation: eject 1s ease forwards;
 }
 
+.reveal-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #111827, #020617);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.reveal-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.reveal-title {
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.reveal-names {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reveal-name {
+  font-size: 26px;
+  animation: floatUp 2.5s ease forwards;
+}
+
+.reveal-screen.impostor-win,
+.reveal-screen.impostor-eliminated {
+  background: radial-gradient(circle, #7f1d1d, #020617);
+  animation: pulseRed 2s infinite;
+}
+
+.reveal-screen.impostor-win .reveal-title,
+.reveal-screen.impostor-eliminated .reveal-title,
+.reveal-screen.impostor-win .reveal-name,
+.reveal-screen.impostor-eliminated .reveal-name {
+  color: #fee2e2;
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(-40px); }
+}
+
+@keyframes pulseRed {
+  50% { box-shadow: inset 0 0 120px rgba(239,68,68,.35); }
+}
+
+@keyframes eject {
+  to { transform: translateY(200px) scale(.4); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  section {
+    margin: 12px;
+    padding: 22px;
+  }
+
+  #timer {
+    font-size: 42px;
+  }
+
+  .card-back {
+    font-size: 26px;
+  }
+}
+
+.among {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 10px;
+  color: white;
+  text-shadow: 2px 2px rgb(116, 116, 116);
+  text-transform: uppercase;
+  cursor: pointer;
+  border: solid 2px black;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 17px;
+  background-color: hsl(49deg 98% 60%);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  margin-bottom: 10px;
+}
+
+.among:active {
+  transform: scale(0.9);
+  transition: all 100ms ease;
+}
+
+.among svg {
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.play {
+  transition: all 0.5s ease;
+  transition-delay: 300ms;
+}
+
+.among:hover svg {
+  transform: scale(3) translate(50%);
+}
+
+.now {
+  position: absolute;
+  left: 0;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.among:hover .now {
+  transform: translateX(10px);
+  transition-delay: 300ms;
+}
+
+.among:hover .play {
+  transform: translateX(200%);
+  transition-delay: 300ms;
+}
