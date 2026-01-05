@@ -114,12 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
 
-  let players = [];
+    let players = [];
   let secretWord = "";
   let currentPlayer = 0;
   let timeLeft = 0;
   let timerInterval = null;
   let selectedVote = null;
+  let firstRound = true;
+  let startingPlayerIndex = null;
 
   function showScreen(name) {
     Object.values(screens).forEach(s => s.classList.add("hidden"));
@@ -182,12 +184,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextBtn.addEventListener("click", () => {
     currentPlayer++;
-    currentPlayer >= players.length ? startRound() : updateCard();
+    if (currentPlayer >= players.length) {
+      startRound();
+    } else {
+      updateCard();
+    }
   });
 
-
   function startRound() {
+    if (firstRound) {
+      startingPlayerIndex = Math.floor(Math.random() * players.length);
+      alert(`El jugador que empieza la ronda es: ${players[startingPlayerIndex].name}`);
+      firstRound = false;
+    }
+
     showScreen("round");
+    currentPlayer = startingPlayerIndex;
     updateTimer();
 
     timerInterval = setInterval(() => {
@@ -216,6 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("voting");
     votesEl.innerHTML = "";
     selectedVote = null;
+    const startInfo = document.createElement("div");
+    startInfo.className = "vote-player selected";
+    startInfo.style.textAlign = "center";
+    startInfo.textContent = `Empieza: ${players[startingPlayerIndex].name}`;
+    votesEl.appendChild(startInfo);
 
     players.forEach((p, i) => {
       const div = document.createElement("div");
@@ -244,9 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.createElement("div");
     overlay.className = "reveal-screen";
 
-    if (isImpostor) {
-      overlay.classList.add("impostor-eliminated");
-    }
+    if (isImpostor) overlay.classList.add("impostor-eliminated"); // 🔴 fondo rojo
 
     overlay.innerHTML = `
       <div class="reveal-content">
@@ -290,9 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reveal = document.createElement("div");
     reveal.className = "reveal-screen";
 
-    if (winner === "impostor") {
-      reveal.classList.add("impostor-win");
-    }
+    if (winner === "impostor") reveal.classList.add("impostor-win"); // 🔴 fondo rojo
 
     reveal.innerHTML = `
       <div class="reveal-content">
