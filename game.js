@@ -26,95 +26,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const votesEl = $("votes");
   const finishVoteBtn = $("finishVoteBtn");
+  const starterInfo = $("starterInfo");
+
 
   const categories = {
-  argentina: [
-    "Mate", "Boliche", "San clemente", "Fernet", "Obelisco",
-    "Dulce de leche", "Alfajores", "Pastelitos", "Facturas", "Tango",
-    "Malbec", "Puerto madero", "Yerba", "Gaucho", "Cataratas",
-    "Glaciar", "Mar del Plata", "Dia de la independencia", "Mendoza", "Dulce de batata",
-    "Vigilante", "Belgrano", "25 de mayo", "Avellaneda", "Colegio",
-    "Bombilla", "La plata", "Puerto Madero", "La Boca", "Recoleta",
-    "Córdoba", "Rosario", "Bariloche", "Iguazú", "San Telmo",
-    "Rock nacional", "Picada", "Fútbol argentino", "Cumbia", "Politica",
-    "Vino", "Cervezas artesanales", "Mate cocido", "Corrupcion", "Villeros",
-    "Chetos", "Milipilis", "Parrilla", "Mendoza", "Chamamé"
-  ],
-  famosos: [
-    "Darín", "Francella", "Lali",
-    "Cris Morena", "Ricardo Darín", "Sandro", "Mirtha Legrand", "Susana Giménez",
-    "Guillermo Francella", "Macri", "Luisana Lopilato", "Javier Milei",
-    "China Suarez", "Ricky Martin", "Cristina Kirchner", "La Roca", "Tom Holland",
-    "Wanda Nara", "Florencia Peña", "Barassi", "Donald Trump",
-    "Carlos Gardel", "Flavio Azzaro", "Chiqui tapia", "El bananero",
-    "Coscu", "Albert Einstein", "Leonardo da Vinci", "Leonardo DiCaprio", "Barack Obama",
-    "Papa Francisco", "Will Smith", " Robert Downey Jr.", "Mario Pergolini",
-    "Sydney Sweeney", "Mark Zuckerberg", "Scaloni", "Bilardo",
-    "Davo Xeneixe", "La cobra", "Gaston Edul", "Alberto Fernandez",
-    "Reina Isabell", "Diego Peretti", "Marcelo Tinelli",
-    "Jorge Rial", "Michael Jordan", "Kobe Bryant"
-  ],
-  cantantes: [
-    "Duki", "Wos", "Cerati", "Shakira",
-    "Bad Bunny", "J Balvin", "Rosalía", "Karol G", "Anuel AA",
-    "Rauw Alejandro", "Maluma", "Ozuna", "Nathy Peluso", "Cazzu",
-    "Paulo Londra", "Nicki Nicole", "Bizarrap", "TINI", "Andrés Calamaro",
-    "Camilo", "ACDC", "Luck Ra", "Bob Marley", "Michael Jackson",
-    "Justin Bieber", "Ricky Martin", "Maria Becerra", "Madonna", "Chayanne",
-    "Indio Solari", "Romeo Santos", "Daddy Yankee", "Paul McCartney", "Bono",
-    "Mick Jagger", "Los Miranda", "Lady Gaga", "Ciro y los persas", "Charly Garcia",
-  ],
-  futbol: [
-    "Messi", "Maradona", "Ronaldo", "Mbappé",
-    "Neymar", "Cristiano Ronaldo", "Suárez", "Lewandowski", "Zlatan Ibrahimovic",
-    "Kylian Mbappe", "Gareth Bale", "Harry Kane", "Sergio Ramos", "Paulo Dybala",
-    "Lautaro Martínez", "Karim Benzema", "Eden Hazard", "Kevin De Bruyne", "Phil Foden",
-    "Thiago Silva", "Mané", "Raheem Sterling", "Virgil van Dijk", "Robert Lewandowski",
-    "Romelu Lukaku", "Erling Haaland", "Joshua Kimmich", "Toni Kroos", "Frenkie de Jong",
-    "Antoine Griezmann", "Marc-André ter Stegen", "Jan Oblak", "Gianluigi Donnarumma", "Ederson",
-    "Alisson Becker", "Raphaël Varane", "Trent Alexander-Arnold", "Jadon Sancho", "Paulo Maldini",
-    "Andrea Pirlo", "Frank Lampard", "Steven Gerrard", "Thierry Henry", "Zinedine Zidane",
-    "Xavi Hernández", "Iniesta", "Ronaldinho", "Kaka", "David Beckham"
-  ],
-  comidas: [
-    "Hamburguesa", "Pizza", "Taco", "Sushi", "Empanada",
-    "Asado", "Hotdog", "Ensalada", "Pasta", "Pan",
-    "Croissant", "Dulce de leche", "Helado", "Churro", "Arepa",
-    "Ceviche", "Paella", "Ramen", "Galleta", "Brownie",
-    "Tarta", "Milanesa", "Canelones", "Ñoquis", "Sopa",
-    "Burrito", "Falafel", "Lasaña", "Panqueque", "Crepe",
-    "Sandwich", "Frutilla", "Manzana", "Banana", "Chocolate",
-    "Carne", "Pollo", "Cerdo", "Queso", "Leche",
-    "Arroz", "Fideos", "Maíz", "Papas fritas", "Salsa",
-    "Mostaza", "Mayonesa", "Ketchup", "Aceituna", "Tomate"
-  ],
-  animales: [
-    "Perro", "Gato", "Elefante", "Tigre", "León",
-    "Mono", "Jirafa", "Cebra", "Caballo", "Vaca",
-    "Oveja", "Cerdo", "Conejo", "Ratón", "Rata",
-    "Lobo", "Zorro", "Panda", "Koala", "Canguro",
-    "Tortuga", "Serpiente", "Cocodrilo", "Delfín", "Ballena",
-    "Tiburón", "Pez", "Pollo", "Gallina", "Pato",
-    "Águila", "Búho", "Pavo", "Pingüino", "Foca",
-    "Erizo", "Murciélago", "Ornitorrinco", "Hipopótamo", "Rinoceronte",
-    "Camello", "Llama", "Oso", "Oso panda", "Oso polar",
-    "Halcón", "Gallo", "Ganso", "Tarántula", "Medusa"
-  ],
-  "18": [
-    "Whisky", "Vodka", "Coctel", "Apuestas", "Casino",
-    "Poker", "Striptease", "Pornografia", "Cuarteto", "Porro",
-    "Cocaina", "Cigarrillo", "Marihuana", "Tussi", "Vapeo",
-    "Nudes", "Sexo", "Erotismo", "Pene", "Prostitutas",
-    "Virginidad", "Telos", "Trios", "Travestis", "Dildo",
-    "Lencería", "Tetas", "LSD", "Videochat", "Sexo Oral",
-    "Sensual", "Stripper", "Sexo Anal", "Only Fans", "Besos",
-    "Tinder", "Infidelidad", "Orgasmo", "Lesbianas", "Sexo virtual",
-    "Paja", "Excitación", "Gays"
-  ]
-};
+    argentina: [
+      "Mate", "Boliche", "San clemente", "Fernet", "Obelisco",
+      "Dulce de leche", "Alfajores", "Pastelitos", "Facturas", "Tango",
+      "Malbec", "Puerto madero", "Yerba", "Gaucho", "Cataratas",
+      "Glaciar", "Mar del Plata", "Dia de la independencia", "Mendoza", "Dulce de batata",
+      "Vigilante", "Belgrano", "25 de mayo", "Avellaneda", "Colegio",
+      "Bombilla", "La plata", "Puerto Madero", "La Boca", "Recoleta",
+      "Córdoba", "Rosario", "Bariloche", "Iguazú", "San Telmo",
+      "Rock nacional", "Picada", "Fútbol argentino", "Cumbia", "Politica",
+      "Vino", "Cervezas artesanales", "Mate cocido", "Corrupcion", "Villeros",
+      "Chetos", "Milipilis", "Parrilla", "Mendoza", "Chamamé"
+    ],
+    famosos: [
+      "Darín", "Francella", "Lali",
+      "Cris Morena", "Ricardo Darín", "Sandro", "Mirtha Legrand", "Susana Giménez",
+      "Guillermo Francella", "Macri", "Luisana Lopilato", "Javier Milei",
+      "China Suarez", "Ricky Martin", "Cristina Kirchner", "La Roca", "Tom Holland",
+      "Wanda Nara", "Florencia Peña", "Barassi", "Donald Trump",
+      "Carlos Gardel", "Flavio Azzaro", "Chiqui tapia", "El bananero",
+      "Coscu", "Albert Einstein", "Leonardo da Vinci", "Leonardo DiCaprio", "Barack Obama",
+      "Papa Francisco", "Will Smith", " Robert Downey Jr.", "Mario Pergolini",
+      "Sydney Sweeney", "Mark Zuckerberg", "Scaloni", "Bilardo",
+      "Davo Xeneixe", "La cobra", "Gaston Edul", "Alberto Fernandez",
+      "Reina Isabell", "Diego Peretti", "Marcelo Tinelli",
+      "Jorge Rial", "Michael Jordan", "Kobe Bryant"
+    ],
+    cantantes: [
+      "Duki", "Wos", "Cerati", "Shakira",
+      "Bad Bunny", "J Balvin", "Rosalía", "Karol G", "Anuel AA",
+      "Rauw Alejandro", "Maluma", "Ozuna", "Nathy Peluso", "Cazzu",
+      "Paulo Londra", "Nicki Nicole", "Bizarrap", "TINI", "Andrés Calamaro",
+      "Camilo", "ACDC", "Luck Ra", "Bob Marley", "Michael Jackson",
+      "Justin Bieber", "Ricky Martin", "Maria Becerra", "Madonna", "Chayanne",
+      "Indio Solari", "Romeo Santos", "Daddy Yankee", "Paul McCartney", "Bono",
+      "Mick Jagger", "Los Miranda", "Lady Gaga", "Ciro y los persas", "Charly Garcia",
+    ],
+    futbol: [
+      "Messi", "Maradona", "Ronaldo", "Mbappé",
+      "Neymar", "Cristiano Ronaldo", "Suárez", "Lewandowski", "Zlatan Ibrahimovic",
+      "Kylian Mbappe", "Gareth Bale", "Harry Kane", "Sergio Ramos", "Paulo Dybala",
+      "Lautaro Martínez", "Karim Benzema", "Eden Hazard", "Kevin De Bruyne", "Phil Foden",
+      "Thiago Silva", "Mané", "Raheem Sterling", "Virgil van Dijk", "Robert Lewandowski",
+      "Romelu Lukaku", "Erling Haaland", "Joshua Kimmich", "Toni Kroos", "Frenkie de Jong",
+      "Antoine Griezmann", "Marc-André ter Stegen", "Jan Oblak", "Gianluigi Donnarumma", "Ederson",
+      "Alisson Becker", "Raphaël Varane", "Trent Alexander-Arnold", "Jadon Sancho", "Paulo Maldini",
+      "Andrea Pirlo", "Frank Lampard", "Steven Gerrard", "Thierry Henry", "Zinedine Zidane",
+      "Xavi Hernández", "Iniesta", "Ronaldinho", "Kaka", "David Beckham"
+    ],
+    comidas: [
+      "Hamburguesa", "Pizza", "Taco", "Sushi", "Empanada",
+      "Asado", "Hotdog", "Ensalada", "Pasta", "Pan",
+      "Croissant", "Dulce de leche", "Helado", "Churro", "Arepa",
+      "Ceviche", "Paella", "Ramen", "Galleta", "Brownie",
+      "Tarta", "Milanesa", "Canelones", "Ñoquis", "Sopa",
+      "Burrito", "Falafel", "Lasaña", "Panqueque", "Crepe",
+      "Sandwich", "Frutilla", "Manzana", "Banana", "Chocolate",
+      "Carne", "Pollo", "Cerdo", "Queso", "Leche",
+      "Arroz", "Fideos", "Maíz", "Papas fritas", "Salsa",
+      "Mostaza", "Mayonesa", "Ketchup", "Aceituna", "Tomate"
+    ],
+    animales: [
+      "Perro", "Gato", "Elefante", "Tigre", "León",
+      "Mono", "Jirafa", "Cebra", "Caballo", "Vaca",
+      "Oveja", "Cerdo", "Conejo", "Ratón", "Rata",
+      "Lobo", "Zorro", "Panda", "Koala", "Canguro",
+      "Tortuga", "Serpiente", "Cocodrilo", "Delfín", "Ballena",
+      "Tiburón", "Pez", "Pollo", "Gallina", "Pato",
+      "Águila", "Búho", "Pavo", "Pingüino", "Foca",
+      "Erizo", "Murciélago", "Ornitorrinco", "Hipopótamo", "Rinoceronte",
+      "Camello", "Llama", "Oso", "Oso panda", "Oso polar",
+      "Halcón", "Gallo", "Ganso", "Tarántula", "Medusa"
+    ],
+    "18": [
+      "Whisky", "Vodka", "Coctel", "Apuestas", "Casino",
+      "Poker", "Striptease", "Pornografia", "Cuarteto", "Porro",
+      "Cocaina", "Cigarrillo", "Marihuana", "Tussi", "Vapeo",
+      "Nudes", "Sexo", "Erotismo", "Pene", "Prostitutas",
+      "Virginidad", "Telos", "Trios", "Travestis", "Dildo",
+      "Lencería", "Tetas", "LSD", "Videochat", "Sexo Oral",
+      "Sensual", "Stripper", "Sexo Anal", "Only Fans", "Besos",
+      "Tinder", "Infidelidad", "Orgasmo", "Lesbianas", "Sexo virtual",
+      "Paja", "Excitación", "Gays"
+    ]
+  };
 
 
-    let players = [];
+  let players = [];
   let secretWord = "";
   let currentPlayer = 0;
   let timeLeft = 0;
@@ -122,6 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedVote = null;
   let firstRound = true;
   let startingPlayerIndex = null;
+
+  function vibrate(pattern) {
+    if ("vibrate" in navigator) {
+      navigator.vibrate(pattern);
+    }
+  }
 
   function showScreen(name) {
     Object.values(screens).forEach(s => s.classList.add("hidden"));
@@ -154,7 +162,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const names = [...playersNamesContainer.querySelectorAll("input")]
       .map((i, idx) => i.value || `Jugador ${idx + 1}`);
 
-    players = names.map(name => ({ name, role: "player" }));
+    players = names.map(name => ({
+      name,
+      role: "player",
+      hasSeen: false
+    }));
 
     shuffle([...Array(count).keys()])
       .slice(0, impostorCount)
@@ -169,18 +181,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function updateCard() {
-    playerTitle.textContent = `Turno de ${players[currentPlayer].name}`;
-    card.classList.remove("show");
+    const player = players[currentPlayer];
+
+    playerTitle.textContent = `Turno de ${player.name}`;
+    card.classList.remove("show", "seen");
     cardBack.textContent = "";
   }
 
+
+
   card.addEventListener("click", () => {
-    card.classList.toggle("show");
+    const player = players[currentPlayer];
+
+    if (player.hasSeen) return;
+
+    card.classList.add("show");
     cardBack.textContent =
-      players[currentPlayer].role === "impostor"
-        ? "IMPOSTOR"
-        : secretWord;
+      player.role === "impostor" ? "IMPOSTOR" : secretWord;
+
+    player.hasSeen = true;
+
+    setTimeout(() => {
+      card.classList.remove("show");
+      card.classList.add("seen");
+      cardBack.textContent = "PALABRA VISTA";
+    }, 1200);
   });
+
 
   nextBtn.addEventListener("click", () => {
     currentPlayer++;
@@ -194,12 +221,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function startRound() {
     if (firstRound) {
       startingPlayerIndex = Math.floor(Math.random() * players.length);
-      alert(`El jugador que empieza la ronda es: ${players[startingPlayerIndex].name}`);
       firstRound = false;
     }
 
     showScreen("round");
-    currentPlayer = startingPlayerIndex;
+
+    starterInfo.textContent = `Empieza: ${players[startingPlayerIndex].name}`;
+
+    timeLeft = (+timeInput.value || 1) * 60;
     updateTimer();
 
     timerInterval = setInterval(() => {
@@ -211,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, 1000);
   }
+
 
   function updateTimer() {
     const m = Math.floor(timeLeft / 60);
@@ -261,20 +291,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.createElement("div");
     overlay.className = "reveal-screen";
 
-    if (isImpostor) overlay.classList.add("impostor-eliminated"); // 🔴 fondo rojo
+    if (isImpostor) overlay.classList.add("impostor-eliminated");
+
+    if (isImpostor) {
+      vibrate([200, 100, 200, 100, 300]);
+    } else {
+      vibrate([120, 80, 120]);
+    }
+
 
     overlay.innerHTML = `
       <div class="reveal-content">
         <h1>${player.name}</h1>
-        <p>${
-          isImpostor
-            ? `ERA UN IMPOSTOR<br><small>Quedan ${remainingImpostors} impostor${remainingImpostors !== 1 ? "es" : ""}</small>`
-            : "ERA INOCENTE"
-        }</p>
+        <p>${isImpostor
+        ? `ERA UN IMPOSTOR<br><small>Quedan ${remainingImpostors} impostor${remainingImpostors !== 1 ? "es" : ""}</small>`
+        : "ERA INOCENTE"
+      }</p>
       </div>
     `;
 
     document.body.appendChild(overlay);
+    vibrate([200, 100, 200, 100, 300]);
+
 
     setTimeout(() => {
       overlay.remove();
@@ -286,12 +324,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function checkGameState() {
     const impostors = players.filter(p => p.role === "impostor");
     const innocents = players.filter(p => p.role !== "impostor");
-
     if (impostors.length === 0) {
       finalReveal("tripulantes");
       return;
     }
-
     if (impostors.length >= innocents.length) {
       finalReveal("impostor", impostors);
       return;
@@ -301,25 +337,30 @@ document.addEventListener("DOMContentLoaded", () => {
     startRound();
   }
 
+
   function finalReveal(winner, impostors = []) {
     const reveal = document.createElement("div");
     reveal.className = "reveal-screen";
 
-    if (winner === "impostor") reveal.classList.add("impostor-win"); // 🔴 fondo rojo
+    if (winner === "impostor") reveal.classList.add("impostor-win");
+    if (winner === "impostor") {
+      vibrate([400, 200, 400, 200, 600]);
+    } else {
+      vibrate([150, 80, 150, 80, 150]);
+    }
 
     reveal.innerHTML = `
       <div class="reveal-content">
         <h1>${winner === "tripulantes" ? "GANAN LOS TRIPULANTES" : "GANAN LOS IMPOSTORES"}</h1>
-        ${
-          winner === "impostor"
-            ? `<div class="reveal-names">
-                ${impostors.map((p,i)=>`
-                  <div class="reveal-name impostor" style="animation-delay:${i*0.4}s">
+        ${winner === "impostor"
+        ? `<div class="reveal-names">
+                ${impostors.map((p, i) => `
+                  <div class="reveal-name impostor" style="animation-delay:${i * 0.4}s">
                     ${p.name}
                   </div>`).join("")}
               </div>`
-            : ""
-        }
+        : ""
+      }
       </div>
     `;
 
