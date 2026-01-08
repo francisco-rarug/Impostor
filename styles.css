@@ -185,6 +185,13 @@ button.secondary {
   border: 2px solid transparent;
   font-weight: 600;
 }
+.vote-player.info {
+  cursor: default;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  border: none;
+  color: #93c5fd;
+}
+
 
 .vote-player.selected {
   border-color: #5865f2;
@@ -333,6 +340,12 @@ button.secondary {
   margin-bottom: 12px;
   font-size: 18px;
   font-weight: 600;
+  color: #93c5fd;
+}
+.vote-player.info {
+  cursor: default;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  border: none;
   color: #93c5fd;
 }
 

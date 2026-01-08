@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const votesEl = $("votes");
   const finishVoteBtn = $("finishVoteBtn");
   const starterInfo = $("starterInfo");
+  const cardFront = $("cardFront");
+
 
 
   const categories = {
@@ -186,7 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
     playerTitle.textContent = `Turno de ${player.name}`;
     card.classList.remove("show", "seen");
     cardBack.textContent = "";
+    cardFront.textContent = "Tocá para ver tu palabra";
   }
+
 
 
 
@@ -204,9 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       card.classList.remove("show");
       card.classList.add("seen");
-      cardBack.textContent = "PALABRA VISTA";
+      cardBack.textContent = "";
+      cardFront.textContent = "PALABRA YA VISTA";
     }, 1200);
   });
+
 
 
   nextBtn.addEventListener("click", () => {
@@ -262,6 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
     startInfo.className = "vote-player selected";
     startInfo.style.textAlign = "center";
     startInfo.textContent = `Empieza: ${players[startingPlayerIndex].name}`;
+    startInfo.classList.add("info");
+
     votesEl.appendChild(startInfo);
 
     players.forEach((p, i) => {
@@ -270,8 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
       div.textContent = p.name;
       div.onclick = () => {
         selectedVote = i;
-        document.querySelectorAll(".vote-player")
+
+        document.querySelectorAll(".vote-player:not(.info)")
           .forEach(v => v.classList.remove("selected"));
+
         div.classList.add("selected");
       };
       votesEl.appendChild(div);
